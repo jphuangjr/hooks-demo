@@ -23,6 +23,15 @@ class App extends React.Component {
       };
 
       this.generateUsers = this.generateUsers.bind(this);
+      this.filterUsers = this.filterUsers.bind(this);
+  }
+
+  filterUsers(event) {
+    let pattern = new RegExp(event.target.value.toLowerCase())
+    const newList = coworkers.filter(person => {
+      return pattern.test(person.name.toLowerCase());
+    })
+    this.setState({coworkers: newList})
   }
 
   generateUsers() {
@@ -43,6 +52,10 @@ class App extends React.Component {
           <p>
             Checkout Directory
           </p>
+          <div>
+            <input onChange={this.filterUsers} type="text" name="filter" placeholder="Filter Names"/>
+          </div>
+          <br/>
           <div>
             {this.generateUsers()}
           </div>
