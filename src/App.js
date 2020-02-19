@@ -28,13 +28,25 @@ function App() {
     })
   }
 
+  function filterUsers(event) {
+    let pattern = new RegExp(event.target.value.toLowerCase())
+    const newList = coworkers.filter(person => {
+      return pattern.test(person.name.toLowerCase());
+    })
+    setcheckoutCoworkers(newList);
+  }
+
 
   return (
     <div className="App">
       <header className="App-header">
         <p>
           Checkout Directory
-          </p>
+        </p>
+        <div>
+          <input onChange={filterUsers} type="text" placeholder="Filter names"/>
+        </div>
+        <br/>
         <div>
           {generateUsers()}
         </div>
