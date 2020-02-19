@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -16,7 +16,12 @@ const coworkers = [
 
 function App() {
 
-  const [checkoutCoworkers, setcheckoutCoworkers] = useState(coworkers)
+  let [checkoutCoworkers, setcheckoutCoworkers] = useState(coworkers);
+  let [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Pushed ${count} keys`;
+  });
 
   function generateUsers() {
     return checkoutCoworkers.map(person => {
@@ -34,6 +39,7 @@ function App() {
       return pattern.test(person.name.toLowerCase());
     })
     setcheckoutCoworkers(newList);
+    setCount(count + 1);
   }
 
 
